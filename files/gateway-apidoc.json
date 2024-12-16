@@ -1,0 +1,558 @@
+{
+    "openapi": "3.0.3", 
+    "info": {
+        "title": "API Gateway", 
+        "description": "An API Gateway supporting the registration of remote API endpoints", 
+        "version": "v1", 
+        "x-type": "gateway", 
+        "x-refresh-interval-milliseconds": 1000, 
+        "x-singleton": true
+    }, 
+    "servers": [
+        {
+            "url": "http://mf-2:9091/api/gateway/v1"
+        }
+    ], 
+    "paths": {
+        "endpoints/{endpointID}/port": {
+            "ref": "port", 
+            "description": "Port number for this endpoint", 
+            "get": {
+                "operationId": "getPort", 
+                "description": "Get the value of port", 
+                "responses": {
+                    "200": {
+                        "description": "A Integer", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdInteger"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "endpoints/": {
+            "ref": "endpoints", 
+            "description": "Registered endpoints for this API type", 
+            "get": {
+                "operationId": "getEndpoints", 
+                "description": "Get a collection of EndpointBinding", 
+                "responses": {
+                    "200": {
+                        "description": "Get a collection of EndpointBinding", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array", 
+                                    "items": {
+                                        "$ref": "#/components/schemas/EndpointBinding"
+                                    }
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "endpoints/{endpointID}/name": {
+            "ref": "name", 
+            "description": "API name of the this endpoint", 
+            "get": {
+                "operationId": "getName", 
+                "description": "Get the value of name", 
+                "responses": {
+                    "200": {
+                        "description": "A String", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdString"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "apis/{key}/title": {
+            "ref": "title", 
+            "description": "Title of the endpoint API", 
+            "get": {
+                "operationId": "getTitle", 
+                "description": "Get the value of title", 
+                "responses": {
+                    "200": {
+                        "description": "A String", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdString"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "properties", 
+            "x-group-rank": 2
+        }, 
+        "apis/{key}/endpoints": {
+            "ref": "endpoints", 
+            "get": {
+                "operationId": "getEndpoints", 
+                "description": "Get an instance of EndpointBinding", 
+                "parameters": [
+                    {
+                        "name": "endpointID", 
+                        "in": "path", 
+                        "description": "An endpoint ID", 
+                        "schema": {
+                            "$ref": "#/components/schemas/StdUUID"
+                        }, 
+                        "required": true, 
+                        "deprecated": false
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "An object", 
+                        "content": {
+                            "application/json": {}
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group-rank": 0
+        }, 
+        "apis": {
+            "ref": "apis", 
+            "get": {
+                "operationId": "getTypes", 
+                "description": "Get an instance of APIType", 
+                "parameters": [
+                    {
+                        "name": "key", 
+                        "in": "path", 
+                        "description": "A api/version key", 
+                        "schema": {
+                            "$ref": "#/components/schemas/StdString"
+                        }, 
+                        "required": true, 
+                        "deprecated": false
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "An object", 
+                        "content": {
+                            "application/json": {}
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group-rank": 0
+        }, 
+        "apis/": {
+            "ref": "apis", 
+            "description": "APIs available via this gateway", 
+            "get": {
+                "operationId": "getTypes", 
+                "description": "Get a collection of APIType", 
+                "responses": {
+                    "200": {
+                        "description": "Get a collection of APIType", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array", 
+                                    "items": {
+                                        "$ref": "#/components/schemas/APIType"
+                                    }
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "apis/{key}/name": {
+            "ref": "name", 
+            "description": "API name", 
+            "get": {
+                "operationId": "getAPIName", 
+                "description": "Get the value of name", 
+                "responses": {
+                    "200": {
+                        "description": "A String", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdString"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "properties", 
+            "x-group-rank": 0
+        }, 
+        "apis/{key}/servers": {
+            "ref": "servers", 
+            "description": "Array of server URLs", 
+            "get": {
+                "operationId": "getServers", 
+                "description": "Get the value of servers", 
+                "responses": {
+                    "200": {
+                        "description": "A RawJSON", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdJSON"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "properties", 
+            "x-group-rank": 3
+        }, 
+        "apis/{key}/singleton": {
+            "ref": "singleton", 
+            "description": "Is this API restricted to a singleton endpoint", 
+            "get": {
+                "operationId": "isSingleton", 
+                "description": "Get the value of singleton", 
+                "responses": {
+                    "200": {
+                        "description": "A Boolean", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdBoolean"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "properties", 
+            "x-group-rank": 3
+        }, 
+        "apis/{key}/version": {
+            "ref": "version", 
+            "description": "API version for this collection of endpoints", 
+            "get": {
+                "operationId": "getAPIVersion", 
+                "description": "Get the value of version", 
+                "responses": {
+                    "200": {
+                        "description": "A String", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdString"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "properties", 
+            "x-group-rank": 1
+        }, 
+        "endpoints": {
+            "ref": "endpoints", 
+            "description": "Registered endpoints for this API type", 
+            "get": {
+                "operationId": "getEndpoints", 
+                "description": "Get a collection of EndpointBinding", 
+                "responses": {
+                    "200": {
+                        "description": "Get a collection of EndpointBinding", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array", 
+                                    "items": {
+                                        "$ref": "#/components/schemas/EndpointBinding"
+                                    }
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "apis/{key}/description": {
+            "ref": "description", 
+            "description": "Description of the API", 
+            "get": {
+                "operationId": "getDescription", 
+                "description": "Get the value of description", 
+                "responses": {
+                    "200": {
+                        "description": "A String", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdString"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "properties", 
+            "x-group-rank": 3
+        }, 
+        "keepAlive": {
+            "ref": "keepAlive", 
+            "description": "Keep alive the endpoints for the gateway at the given host and port. Returns an array of known IDs", 
+            "get": {
+                "operationId": "getGatewayEndpointIDs", 
+                "description": "Get the value of keepAlive", 
+                "parameters": [
+                    {
+                        "name": "address", 
+                        "in": "query", 
+                        "description": "Host name or IP address", 
+                        "schema": {
+                            "$ref": "#/components/schemas/StdString"
+                        }, 
+                        "required": false, 
+                        "deprecated": false
+                    }, 
+                    {
+                        "name": "port", 
+                        "in": "query", 
+                        "description": "Server port number", 
+                        "schema": {
+                            "$ref": "#/components/schemas/StdInteger"
+                        }, 
+                        "required": false, 
+                        "deprecated": false, 
+                        "x-default-value": "0"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "A RawJSON", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdJSON"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "endpoints/{endpointID}/ID": {
+            "ref": "ID", 
+            "description": "Identity for this endpoint", 
+            "get": {
+                "operationId": "getEndpointID", 
+                "description": "Get the value of ID", 
+                "responses": {
+                    "200": {
+                        "description": "A UUID", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdUUID"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "apis/{key}/endpoints/{endpointID}/endpointID": {
+            "ref": "endpointID", 
+            "description": "Identifier for this endpoint", 
+            "get": {
+                "operationId": "getEndpointID", 
+                "description": "Get the value of endpointID", 
+                "responses": {
+                    "200": {
+                        "description": "A UUID", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdUUID"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "properties", 
+            "x-group-rank": 0
+        }, 
+        "endpoints/{endpointID}/interval": {
+            "ref": "interval", 
+            "description": "Refresh interval (milliseconds) for this endpoint", 
+            "get": {
+                "operationId": "getRefreshIntervalMilliseconds", 
+                "description": "Get the value of interval", 
+                "responses": {
+                    "200": {
+                        "description": "A Integer", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdInteger"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "endpoints/{endpointID}/host": {
+            "ref": "host", 
+            "description": "Host/IP address for this endpoint", 
+            "get": {
+                "operationId": "getHost", 
+                "description": "Get the value of host", 
+                "responses": {
+                    "200": {
+                        "description": "A String", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdString"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }, 
+        "endpoints/{endpointID}/version": {
+            "ref": "version", 
+            "description": "API version for this endpoint", 
+            "get": {
+                "operationId": "getVersion", 
+                "description": "Get the value of version", 
+                "responses": {
+                    "200": {
+                        "description": "A String", 
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StdString"
+                                }
+                            }
+                        }
+                    }, 
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }, 
+            "x-group": "", 
+            "x-group-rank": 0
+        }
+    }, 
+    "components": {
+        "schemas": {
+            "StdInteger": {
+                "type": "integer", 
+                "format": "int32"
+            }, 
+            "StdString": {
+                "type": "string"
+            }, 
+            "StdNumber": {
+                "type": "number", 
+                "format": "float"
+            }, 
+            "StdJSON": {
+                "type": "string"
+            }, 
+            "StdUUID": {
+                "type": "string"
+            }
+        }
+    }
+}
